@@ -27,20 +27,21 @@ export interface ClientToServerEvents {
   joinDm: (partnerId: number) => void;
   createMessage: (
     args: {
-      groupId: number;
-      text: number;
-      recieverId?: number;
+      groupId?: number;
+      receiverId?: number;
+      text: string;
       parentMessageId?: number;
     },
     callback: (response: { message?: Message; error?: unknown }) => void
   ) => void;
-  markMessagesAsRead: (messageId: number) => void;
+  markMessageAsRead: (messageId: number) => void;
   markChatMessagesAsRead: (args: {
     groupId?: number;
     partnerId?: number;
   }) => void;
   typing: (args: { chatId: number; mode: ChatMode; isTyping: boolean }) => void;
 }
+
 export interface InterServerEvents {
   ping: () => void;
 }
@@ -51,6 +52,7 @@ export interface SocketData {
     username: string;
   };
 }
+
 export type TypedIOServer = Server<
   ClientToServerEvents,
   ServerToClientEvents,
