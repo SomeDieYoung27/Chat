@@ -22,6 +22,7 @@ export const SignUpForm = () => {
   const { register, handleSubmit, errors } = useForm({
     initialValues: { fullName: "", username: "", password: "" },
   });
+
   const { mutate: signupUser, isPending } = useMutation<
     IUserResponse,
     Error,
@@ -32,13 +33,14 @@ export const SignUpForm = () => {
       if (data.user && data.token) {
         accessToken.set(data.token);
         setAuth(data);
-        toast({ title: "Sign Up Success", severity: "success" });
+        toast({ title: "Sign up success", severity: "success" });
       }
     },
     onError(error) {
-      toast({ title: "Sign up success", severity: "error" });
+      toast({ title: (error as Error).message, severity: "error" });
     },
   });
+
   const onSubmit = handleSubmit(signupUser);
 
   return (
@@ -46,10 +48,10 @@ export const SignUpForm = () => {
       <Input
         type="text"
         label="Full name"
-        autoComplete="username"
-        {...register("username", validators.username)}
-        error={errors.username}
-        placeholder="eg:asserkt"
+        {...register("fullName", validators.fullname)}
+        error={errors.fullName}
+        placeholder="eg: Aseer KT"
+        autoFocus
       />
       <Input
         type="text"
@@ -60,12 +62,12 @@ export const SignUpForm = () => {
         placeholder="eg: aseerkt"
       />
       <Input
-        type="text"
-        label="Username"
-        autoComplete="username"
-        {...register("username", validators.username)}
-        error={errors.username}
-        placeholder="eg: aseerkt"
+        type="password"
+        label="Password"
+        autoComplete="current-password"
+        {...register("password", validators.password)}
+        error={errors.password}
+        placeholder="eg: supersecret"
       />
       <Button type="submit" disabled={isPending}>
         Create account
