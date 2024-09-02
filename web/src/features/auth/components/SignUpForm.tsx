@@ -22,7 +22,6 @@ export const SignUpForm = () => {
   const { register, handleSubmit, errors } = useForm({
     initialValues: { fullName: "", username: "", password: "" },
   });
-
   const { mutate: signupUser, isPending } = useMutation<
     IUserResponse,
     Error,

@@ -15,12 +15,12 @@ export const login = async (payload: ILoginVariables) =>
     credentials: config.isDev ? "include" : "same-origin",
   });
 
-export const signup = async (payload: ISignUpVariables) => {
+export const signup = async (payload: ISignUpVariables) =>
   fetcher(`users`, {
     method: "POST",
     body: JSON.stringify(payload),
   });
-};
+
 export const getNewAccessToken = async () => {
   const res = await fetch(`${config.backendUrl}/api/refresh`, {
     method: "POST",
