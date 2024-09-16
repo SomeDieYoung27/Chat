@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
       {
         path: "/auth",
         lazy: () => import("./features/auth/layouts/AuthFormWrapper"),
+        children: [
+          { path: "login", lazy: () => import("./pages/Login") },
+          { path: "signup", lazy: () => import("./pages/SignUp") },
+        ],
       },
     ],
   },
